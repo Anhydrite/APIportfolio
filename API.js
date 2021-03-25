@@ -17,7 +17,7 @@ app.listen(8080, () => {
     console.log('Serveur à l\'écoute')
 })
   
-app.put('/clap', (req,res) => {
+app.put('/clap', cors(), (req,res) => {
     let content = "";
     content = fs.readFileSync("clapCount.txt", "utf8", (err)=>{
         if(err){
