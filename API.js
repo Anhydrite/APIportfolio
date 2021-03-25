@@ -6,10 +6,17 @@ const cors = require('cors')
 
 app.use(cors())
 
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
-  }, app).listen(8080, () => {
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/robinzmuda.com/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/robinzmuda.com/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/robinzmuda.com/chain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
+
+https.createServer(credentials, app).listen(8080, () => {
     try{
         fs.readFileSync("clapCount.txt")
     }catch(e){
