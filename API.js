@@ -3,14 +3,8 @@ const app = express()
 const fs = require('fs');
 const cors = require('cors')
 
-app.options('*', cors())
+app.use(cors())
 
-var corsOptions = {
-    "origin": "*",
-    "methods": "PUT, OPTIONS",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
-}
 
 app.listen(8080, () => {
     try{
@@ -23,7 +17,7 @@ app.listen(8080, () => {
     console.log('Serveur à l\'écoute')
 })
   
-app.put('/clap', cors(corsOptions), (req,res) => {
+app.put('/clap', (req,res) => {
     let content = "";
     content = fs.readFileSync("clapCount.txt", "utf8", (err)=>{
         if(err){
