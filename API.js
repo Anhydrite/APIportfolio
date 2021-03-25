@@ -7,7 +7,7 @@ app.options('*', cors())
 
 var corsOptions = {
     "origin": "*",
-    "methods": "PUT, OPTION",
+    "methods": "PUT, OPTIONS",
     "preflightContinue": false,
     "optionsSuccessStatus": 204
 }
