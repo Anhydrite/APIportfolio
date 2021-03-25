@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const fs = require('fs');
+const cors = require('cors')
+
 
 app.listen(8080, () => {
     try{
@@ -13,7 +15,7 @@ app.listen(8080, () => {
     console.log('Serveur à l\'écoute')
 })
   
-app.get('/clap', (req,res) => {
+app.put('/clap', cors(), (req,res) => {
     let content = "";
     content = fs.readFileSync("clapCount.txt", "utf8", (err)=>{
         if(err){
