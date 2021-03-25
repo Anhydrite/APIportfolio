@@ -3,15 +3,14 @@ const app = express()
 const fs = require('fs');
 const cors = require('cors')
 
+app.options('*', cors())
+
 var corsOptions = {
-    origin: function (origin, callback) {
-        // db.loadOrigins is an example call to load
-        // a list of origins from a backing database
-        db.loadOrigins(function (error, origins) {
-          callback(error, origins)
-        })
-      }
-  }
+    "origin": "*",
+    "methods": "PUT, OPTION",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+}
 
 app.listen(8080, () => {
     try{
