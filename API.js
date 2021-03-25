@@ -41,3 +41,15 @@ app.put('/clap', cors(), (req,res) => {
     })
     res.send(content);
 })
+
+app.get('/clap', cors(), (req,res) => {
+    let content = "";
+    content = fs.readFileSync("clapCount.txt", "utf8", (err)=>{
+        if(err){
+            console.log(err);
+            throw err;
+        }
+    })
+   
+    res.send(content);
+})
