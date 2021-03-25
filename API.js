@@ -22,7 +22,6 @@ app.get('/clap', (req,res) => {
         }
     })
     content = (parseInt(content)+1).toString();
-    console.log(content);
     fs.writeFileSync("clapCount.txt", content.toString(), (err)=>{
         res.send(err);
     })
