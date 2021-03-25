@@ -3,6 +3,15 @@ const app = express()
 const fs = require('fs');
 const cors = require('cors')
 
+var corsOptions = {
+    origin: function (origin, callback) {
+        // db.loadOrigins is an example call to load
+        // a list of origins from a backing database
+        db.loadOrigins(function (error, origins) {
+          callback(error, origins)
+        })
+      }
+  }
 
 app.listen(8080, () => {
     try{
@@ -15,7 +24,7 @@ app.listen(8080, () => {
     console.log('Serveur à l\'écoute')
 })
   
-app.put('/clap', cors(), (req,res) => {
+app.put('/clap', cors(corsOptions), (req,res) => {
     let content = "";
     content = fs.readFileSync("clapCount.txt", "utf8", (err)=>{
         if(err){
